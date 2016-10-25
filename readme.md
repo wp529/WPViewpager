@@ -1,6 +1,9 @@
 #   WPViewpager
  一行代码快速实现ViewPager加载图片 网络和本地图片 可设置轮询 轮询间隔时间 触摸时取消轮询 抬起继续轮询 导航小点跟随页面滑动 可自行设置小点样式 便捷实现导航页面开发 顶部广告开发
 #   步骤
+#   效果展示
+    ![image](https://github.com/wp529/WPViewPager/raw/master/pic1/demo1.png)
+	![image](https://github.com/wp529/WPViewPager/raw/master/pic1/demo2.png)
 #   引用
    将本类库下载下来作为moudle导入到工作控件 添加依赖 compile project(':wpviewpager-lib')
 #    使用详解
