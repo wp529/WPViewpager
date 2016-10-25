@@ -5,7 +5,7 @@
 
     <!--多张图片的布局,包括导航小点,左右切换-->
 
-    <android.support.v4.view.ViewPager
+    <com.pzhu.wpviewpager_lib.HandleTouchViewPager
         android:id="@+id/vp_images"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

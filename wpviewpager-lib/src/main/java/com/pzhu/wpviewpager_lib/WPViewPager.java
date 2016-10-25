@@ -3,6 +3,7 @@ package com.pzhu.wpviewpager_lib;
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -10,12 +11,13 @@ import android.widget.LinearLayout;
 /**
  * 一键设置图片的viewpager 可以轮询，可加载本地或者网络图片
  */
-public class WPViewPager extends FrameLayout {
+public class WPViewPager extends FrameLayout{
     private long time; //viewpager轮询时间
     private LinearLayout pointGroup;
     private View point;
     private Context ctx;
-    private ViewPager vp;
+    private HandleTouchViewPager vp;
+
 
     public WPViewPager(Context context) {
         this(context, null);
@@ -29,7 +31,7 @@ public class WPViewPager extends FrameLayout {
 
     private void init(Context context) {
         View.inflate(context, R.layout.layout_images, this);
-        vp = (ViewPager) findViewById(R.id.vp_images);
+        vp = (HandleTouchViewPager) findViewById(R.id.vp_images);
         pointGroup = (LinearLayout) findViewById(R.id.ll_point_group);
         point = findViewById(R.id.view_point);
     }
@@ -43,6 +45,7 @@ public class WPViewPager extends FrameLayout {
      * @param looper        是否需要轮询
      */
     public void setImageResourceByInternet(String[] resource, int pointSelectId, int pointNormalId, boolean looper) {
+        vp.setPageCount(resource.length);
         if (pointSelectId == 0) {
             point.setBackgroundResource(R.drawable.page_guide_check);
         } else {
@@ -66,6 +69,7 @@ public class WPViewPager extends FrameLayout {
      * @param looper        是否需要轮询
      */
     public void setImageResourceByLocal(int[] resource, int pointSelectId, int pointNormalId, boolean looper) {
+        vp.setPageCount(resource.length);
         if (pointSelectId == 0) {
             point.setBackgroundResource(R.drawable.page_guide_check);
         } else {
@@ -84,4 +88,14 @@ public class WPViewPager extends FrameLayout {
     public void setLooperTime(long time) {
         this.time = time;
     }
+
+    public void setOnPageClickListener(final OnPageClickListener listener){
+        vp.setOnPageClickListener(new HandleTouchViewPager.OnViewPagerClickListener() {
+            @Override
+            public void onViewPagerClick(int index) {
+                listener.onPageClick(index);
+            }
+        });
+    }
+
 }
